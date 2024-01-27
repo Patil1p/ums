@@ -1,0 +1,92 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-12">
+            <div class="card">
+                <h4 class="mt-2 ml-3">User Form</h4>
+                <div class="card-body">
+                    <form action="" [formGroup]="userInfoForm" (ngSubmit)="formSubmit()">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" name="firstName" id="firstName" class="form-control"
+                                formControlName="firstName" />
+                            <ng-container *ngIf="userInfoForm.controls['firstName'].touched && userInfoForm.controls['firstName'].invalid">
+                                <small class="text-danger" *ngIf="userInfoForm.controls['firstName'].hasError('required')">
+                                    First name is required.
+                                </small>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" name="lastName" id="lastName" class="form-control"
+                                formControlName="lastName" />
+                            <ng-container *ngIf="userInfoForm.controls['lastName'].touched && userInfoForm.controls['lastName'].invalid">
+                                <small class="text-danger" *ngIf="userInfoForm.controls['lastName'].hasError('required')">
+                                    Last name is required.
+                                </small>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            <label for="userAddress">Address</label>
+                            <textarea name="userAddress" id="userAddress" cols="10" rows="3" class="form-control"
+                                formControlName="userAddress"></textarea>
+                            <ng-container *ngIf="userInfoForm.controls['userAddress'].touched && userInfoForm.controls['userAddress'].invalid">
+                                <small class="text-danger" *ngIf="userInfoForm.controls['userAddress'].hasError('required')">
+                                    Address is required.
+                                </small>
+                            </ng-container>
+                            <ng-container *ngIf="userInfoForm.controls['userAddress']?.dirty && userInfoForm.controls['userAddress'].invalid">
+                                <small class="text-danger" *ngIf="userInfoForm.controls['userAddress'].hasError('maxlength')">
+                                    Maximum 70 characters are permissible.
+                                </small>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            <label for="userEmail">Email</label>
+                            <input type="email" name="userEmail" id="userEmail" class="form-control" formControlName="userEmail"
+                                placeholder="" />
+
+                            <ng-container *ngIf="userInfoForm.controls['userEmail']?.touched && userInfoForm.controls['userEmail'].invalid">
+                                <small class="text-danger" *ngIf="userInfoForm.controls['userEmail']?.hasError('required')">
+                                    Email is required.
+                                </small>
+                            </ng-container>
+                            <ng-container *ngIf="userInfoForm.controls['userEmail']?.dirty && userInfoForm.controls['userEmail'].invalid">
+                                <small class="text-danger" *ngIf="userInfoForm.controls['userEmail'].hasError('pattern')">
+                                    Invalid email format.
+                                </small>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            <label for="userContact">Contact</label>
+                            <input type="text" name="userContact" id="userContact" class="form-control" formControlName="userContact" />
+                            <ng-container *ngIf="userInfoForm.controls['userContact'].touched && userInfoForm.controls['userContact'].invalid">
+                                <small class="text-danger" *ngIf="userInfoForm.controls['userContact'].hasError('required')">
+                                    Contact is required.
+                                </small>
+                                <small class="text-danger" *ngIf="userInfoForm.controls['userContact'].hasError('pattern')">
+                                    Only digits are permissible.
+                                </small>
+                                <small class="text-danger" *ngIf="userInfoForm.controls['userContact'].hasError('maxlength')">
+                                    Only 10 digits are permissible.
+                                </small>
+                            </ng-container>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-danger" type="button" [routerLink]="['/users']">Cancel</button>
+                            <button class="btn btn-primary" type="submit" [disabled]="userInfoForm.invalid"
+                                *ngIf="!userId else showUpdate" >
+                                Submit
+                            </button>
+                            <ng-template #showUpdate>
+
+                                <button class="btn btn-success" type="button" (click)="updateUser()">
+                                    Update
+                                </button>
+                            </ng-template>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
